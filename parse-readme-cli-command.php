@@ -16,13 +16,12 @@ namespace ReadmeParser;
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
     require_once( 'parse-readme.php' );
 
+    /**
+     * --file=readme.txt
+     * --output=readme.output
+     */
     function parse( $args, $assoc_args ) {
         $file = $assoc_args['file'];
-        if ( isset($assoc_args['output']) ) {
-            $outfile = $assoc_args['output'];
-        } else {
-            $outfile = "$file.dat";
-        }
         if ( ! $file ) {
             \WP_CLI::error('You need to specify a readme file. Ex. --file=readme.txt');
         }
@@ -30,12 +29,16 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
             \WP_CLI::error("File '$file' is not readable");
         }
         $p = new \WordPress_Readme_Parser();
-        $o = $p->parse_readme( $assoc_args['file'] );
+        $o = $p->parse_readme( $file );
         $data = serialize($o);
-        if ( false === file_put_contents($outfile, $data) ) {
-            \WP_CLI::error("There was an error saving parsed data to file $outfile");
+        if ( isset($assoc_args['output']) ) {
+            if ( false === file_put_contents($assoc_args['output'], $data) ) {
+                \WP_CLI::error("There was an error saving parsed data to file {$assoc_args['output']}");
+            }
+        } else {
+            echo($data);
         }
-        \WP_CLI::success( $outfile );
+        \WP_CLI::success( sprintf('Parsed %d bytes of data', strlen($data)) );
     };
 
     \WP_CLI::add_command( 'parse', __NAMESPACE__ . '\parse' );
