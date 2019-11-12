@@ -18,7 +18,11 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     function parse( $args, $assoc_args ) {
         $file = $assoc_args['file'];
-        $outfile = "$file.dat";
+        if ( isset($assoc_args['output']) ) {
+            $outfile = $assoc_args['output'];
+        } else {
+            $outfile = "$file.dat";
+        }
         if ( ! $file ) {
             \WP_CLI::error('You need to specify a readme file. Ex. --file=readme.txt');
         }
