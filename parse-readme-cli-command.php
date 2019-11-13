@@ -14,7 +14,7 @@
 namespace ReadmeParser;
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-    require_once( 'parse-readme.php' );
+    require_once 'parse-readme.php';
 
     /**
      * --file=readme.txt
