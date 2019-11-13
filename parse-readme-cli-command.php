@@ -2,11 +2,9 @@
 /**
  * Parse readme command
  *
- * <message>
- * : An awesome message to display
- *
- * --append=<message>
- * : An awesome message to append to the original message.
+ * --file=<path to file to parsee>
+ * --output=<optional, path to file to output>
+ *    If not specific, output goes to stdout
  *
  * @when before_wp_load
  */
