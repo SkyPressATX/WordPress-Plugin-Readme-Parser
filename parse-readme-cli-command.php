@@ -6,6 +6,8 @@
  * --output=<optional, path to file to output>
  *    If not specific, output goes to stdout
  *
+ * --format=json
+ *
  * @when before_wp_load
  */
 
@@ -28,7 +30,11 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
         }
         $p = new \WordPress_Readme_Parser();
         $o = $p->parse_readme( $file );
-        $data = serialize($o);
+        if ( 'json' == $assoc_args['format'] ) {
+            $data = json_encode($o);
+        } else {
+            $data = serialize($o);
+        }
         if ( isset($assoc_args['output']) ) {
             if ( false === file_put_contents($assoc_args['output'], $data) ) {
                 \WP_CLI::error("There was an error saving parsed data to file {$assoc_args['output']}");
