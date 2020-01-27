@@ -1,5 +1,5 @@
 {
-  "name": "wp-readme-parser",
+  "name": "skypress/wp-readme-parser",
   "description": "WordPress Plugin Readme Parser",
   "require": {
     "php": "^7.3"
