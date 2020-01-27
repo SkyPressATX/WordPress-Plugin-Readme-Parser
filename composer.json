@@ -3,5 +3,6 @@
   "description": "WordPress Plugin Readme Parser",
   "require": {
     "php": "^7.3"
-  }
+  },
+  "license": "GPLv2 or later"
 }
