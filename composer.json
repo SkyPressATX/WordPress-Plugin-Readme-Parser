@@ -2,7 +2,7 @@
   "name": "skypress/wp-readme-parser",
   "description": "WordPress Plugin Readme Parser",
   "require": {
-    "php": "^7.3"
+    "php": "^7.0"
   },
   "license": "GPL-2.0-or-later"
 }
